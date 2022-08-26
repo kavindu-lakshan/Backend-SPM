@@ -7,6 +7,7 @@ const hpp = require("hpp");
 const cors = require("cors");
 const compression = require('compression')
 
+const AuthController = require('./Routes/auth_routes')
 const AppError = require("./Utils/AppError");
 
 const app = express();
@@ -60,7 +61,7 @@ app.use(
 app.use(compression())
 const base = '/api/v1'
 
-// app.use(`${base}/auth`, authRouter);
+app.use(`${base}/auth`, AuthController);
 // app.use(`${base}/notices`, noticeRouter);
 // app.use(`${base}/admin`, adminRouter);
 
