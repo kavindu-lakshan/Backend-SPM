@@ -1,7 +1,7 @@
 {
-  "name": "SURGE",
+  "name": "EyePax",
   "version": "1.0.0",
-  "description": "SURGE Global Assignment",
+  "description": "Inventory Management System",
   "main": "app.js",
   "scripts": {
     "test": "jest",

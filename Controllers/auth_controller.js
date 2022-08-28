@@ -6,34 +6,6 @@ const { promisify } = require("util");
 const sendEmail = require("../Utils/email");
 const crypto = require("crypto");
 
-
-
-//Register new user
-exports.createStaff = catchAsync(async (req, res, next) => {
-    req.body.password = Math.random().toString(16).substr(2, 8);
-
-    let URL = 'https://assignment-ui.vercel.app';
-
-    const message = `<p>You have register to the system by system admin. Now you can log in to our system using this <b>(${req.body.password})</b> temporary
-    password. After first login attempt please make sure change your password and update your profile. 
-    Using below link you can log in.<div><a href= ${URL} >EyePaX</a></div></p>`;
-
-    const newUser = await User.create(req.body);
-
-    await sendEmail({
-        email: req.body.email,
-        subject: 'Congrats you are being a member of EyePaX Company!!',
-        message:message
-    });
-    res.status(201).json({
-        status: "success",
-        data: {
-            newUser,
-        },
-    });
-});
-
-
 //Login user
 exports.login = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
@@ -53,36 +25,6 @@ exports.login = catchAsync(async (req, res, next) => {
     createSendToken(user, 200, res);
 
 });
-
-
-
-//update user profile
-exports.updateMyAccount = catchAsync(async (req, res, next) => {
-
-    // Get user from collection
-    const user = await User.findById(req.user._id).select("+password");
-
-    //Check if POSTed current password is correct
-    if (!(await user.correctPassword(req.body.current_password, user.password))) {
-        return next(new AppError("Your current password is wrong.", 400));
-    }else {
-        user.first_name = req.body.first_name
-        user.last_name = req.body.last_name
-        user.DOB = req.body.DOB
-        user.mobile = req.body.mobile
-        user.password = req.body.password
-        user.status = true
-
-        await user.save()
-        res.status(201).json({
-            status: "success",
-            data: {
-                user,
-            },
-        });
-    }
-});
-
 
 //get current user
 exports.currentUser = catchAsync(async (req, res, next) => {
