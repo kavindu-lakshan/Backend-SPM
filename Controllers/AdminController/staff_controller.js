@@ -1,7 +1,7 @@
-const User = require("../Models/user_model");
-const catchAsync = require("../Utils/catchAsync");
-const sendEmail = require("../Utils/email");
-const Filter = require('../Utils/Filters')
+const User = require("../../Models/user_model");
+const catchAsync = require("../../Utils/catchAsync");
+const sendEmail = require("../../Utils/email");
+const Filter = require('../../Utils/Filters')
 
 
 exports.createStaff = catchAsync(async (req, res, next) => {
