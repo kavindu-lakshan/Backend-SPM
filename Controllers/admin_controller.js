@@ -1,6 +1,5 @@
 const User = require("../Models/user_model");
 const catchAsync = require("../Utils/catchAsync");
-const AppError = require("../Utils/AppError");
 const sendEmail = require("../Utils/email");
 const Filter = require('../Utils/Filters')
 
@@ -30,7 +29,7 @@ exports.createStaff = catchAsync(async (req, res, next) => {
 });
 
 
-//get all notices
+//get all Staff
 exports.allStaff = catchAsync(async (req, res, next) => {
     let Respond = new Filter(User.find(), req.query).filter().sort().limitFields().paginate();
     const users = await Respond.query;
@@ -43,7 +42,7 @@ exports.allStaff = catchAsync(async (req, res, next) => {
 });
 
 
-//update notices
+//update Staff
 exports.updateStaff = catchAsync(async (req, res, next) => {
     req.body.user = req.user
     let all_Users = await User.findByIdAndUpdate(req.params.id,req.body)
@@ -56,7 +55,7 @@ exports.updateStaff = catchAsync(async (req, res, next) => {
 });
 
 
-//delete notice
+//delete Staff
 exports.deleteStaff = catchAsync(async (req, res, next) => {
     let deletedUser = await User.findByIdAndDelete(req.params.id)
     res.status(200).json({
