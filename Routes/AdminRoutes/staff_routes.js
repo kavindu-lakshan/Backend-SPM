@@ -10,7 +10,7 @@ router.route("/staff")
 
 
 router.route("/staff/:id")
-    .patch(authController.protect, authController.restrictTo('admin'), staffController.updateStaff)
+    .put(authController.protect, authController.restrictTo('admin'), staffController.updateStaff)
     .delete(authController.protect, authController.restrictTo('admin'), staffController.deleteStaff);
 
 module.exports = router;
