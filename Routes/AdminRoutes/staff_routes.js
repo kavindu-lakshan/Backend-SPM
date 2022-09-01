@@ -3,7 +3,7 @@ const staffController = require("../../Controllers/AdminController/staff_control
 const authController = require("../../Controllers/auth_controller");
 const router = express.Router();
 
-//This api-resource route for update and delete specific student
+//This api-resource route for update and delete specific Staff
 router.route("/staff")
     .get(staffController.allStaff)
     .post(staffController.createStaff)
