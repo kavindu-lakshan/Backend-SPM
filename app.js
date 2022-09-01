@@ -17,7 +17,7 @@ const app = express();
 const app_url = process.env.APP_URL
 app.use(
     cors({
-        origin: ["http://localhost:8081","http://localhost:8100","http://192.168.43.156:8100","http://localhost:8082","http://192.168.43.156:8081"],
+        origin: '*',
         credentials: true,
     })
 );
