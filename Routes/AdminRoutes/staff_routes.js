@@ -9,8 +9,8 @@ router.route("/staff")
     .post(staffController.createStaff)
 
 
-router.route("/staff/:id")
-    .put(authController.protect, authController.restrictTo('admin'), staffController.updateStaff)
-    .delete(authController.protect, authController.restrictTo('admin'), staffController.deleteStaff);
+// router.route("/staff/:id")
+//     .put(authController.protect, authController.restrictTo('admin'), staffController.updateStaff)
+//     .delete(authController.protect, authController.restrictTo('admin'), staffController.deleteStaff);
 
 module.exports = router;
