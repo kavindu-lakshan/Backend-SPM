@@ -11,7 +11,7 @@ router.route("/getall")
 router.route("/update/:id")
     .put(ItemController.UpdateItem);   
     
-router.route("/update/:id")
+router.route("/delete/:id")
     .delete(ItemController.DeleteItem);      
 
 module.exports = router;
