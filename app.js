@@ -9,6 +9,7 @@ const compression = require('compression')
 
 const AuthController = require('./Routes/auth_routes')
 const AdminStaff = require('./Routes/AdminRoutes/staff_routes')
+const SupplierController = require('./Routes/SupplierRoutes/itemRoute')
 const AppError = require("./Utils/AppError");
 
 const app = express();
@@ -66,6 +67,9 @@ app.use(`${base}/auth`, AuthController);
 app.use(`${base}/admin`, AdminStaff);
 // app.use(`${base}/notices`, noticeRouter);
 // app.use(`${base}/admin`, adminRouter);
+
+//supplier routes
+app.use(`${base}/supplier`, SupplierController);
 
 app.all("*", (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
