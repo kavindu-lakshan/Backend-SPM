@@ -2,6 +2,7 @@ const Stock = require("../../Models/stock_model");
 const Item = require("../../Models/itemModel");
 const catchAsync = require("../../Utils/catchAsync");
 const Filter = require("../../Utils/Filters");
+const e = require("express");
 
 //Create Stock
 exports.Stock = catchAsync(async (req, res, next) => {
@@ -25,10 +26,13 @@ exports.AllStocks = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
   const stocks = await Respond.query;
+  let Respond2 = [];
+  Respond2.push(await Item.findById(stocks.map((e) => e.item_code)));
+  let details = [...stocks, ...Respond2];
   res.status(201).json({
     status: "success",
     data: {
-      stocks,
+      details,
     },
   });
 });

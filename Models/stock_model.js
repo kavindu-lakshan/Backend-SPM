@@ -11,7 +11,6 @@ const stockSchema = new mongoose.Schema({
   },
   reservation: {
     type: Number,
-    required: [true, "Please Enter Rservations"],
   },
   Availability: {
     type: Boolean,
