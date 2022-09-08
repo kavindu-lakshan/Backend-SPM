@@ -4,16 +4,19 @@ const ItemController = require('../../Controllers/SupplierController/itemControl
 const authController = require('../../Controllers/auth_controller');
 
 router.route("/additem")
-    .post(authController.protect,ItemController.Store);
+    .post(authController.protect, ItemController.Store);
 
 router.route("/getall")
-    .get(authController.protect,ItemController.AllItems);
+    .get(authController.protect, ItemController.AllItems);
+
+router.route("/getallitems")
+    .get(authController.protect, ItemController.AllItemsToDropDown);
 
 router.route("/update/:id")
-    .put(authController.protect,ItemController.UpdateItem);
+    .put(authController.protect, ItemController.UpdateItem);
 
 router.route("/delete/:id")
-    .delete(authController.protect,ItemController.DeleteItem);
+    .delete(authController.protect, ItemController.DeleteItem);
 
 module.exports = router;
 

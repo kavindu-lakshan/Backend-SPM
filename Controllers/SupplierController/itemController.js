@@ -17,7 +17,18 @@ exports.Store = catchAsync(async (req, res, next) => {
 
 //Get all items
 exports.AllItems = catchAsync(async (req, res, next) => {
-    let Respond = new Filter(Item.find({supplier_id:req.user.id}), req.query).filter().sort().limitFields().paginate();
+    let Respond = new Filter(Item.find({ supplier_id: req.user.id }), req.query).filter().sort().limitFields().paginate();
+    const items = await Respond.query;
+    res.status(201).json({
+        status: "success",
+        data: {
+            items,
+        },
+    });
+});
+
+exports.AllItemsToDropDown = catchAsync(async (req, res, next) => {
+    let Respond = new Filter(Item.find(), req.query).filter().sort().limitFields().paginate();
     const items = await Respond.query;
     res.status(201).json({
         status: "success",
@@ -31,7 +42,7 @@ exports.AllItems = catchAsync(async (req, res, next) => {
 //Update item
 exports.UpdateItem = catchAsync(async (req, res, next) => {
     req.body.item = req.item
-    let all_Items = await Item.findByIdAndUpdate(req.params.id,req.body)
+    let all_Items = await Item.findByIdAndUpdate(req.params.id, req.body)
     res.status(201).json({
         status: "success",
         data: {
