@@ -22,7 +22,7 @@ module.exports = addOrder = async (req, res) => {
             item_ref: ObjectId(order.item.value),
             status: "Initiated",
             quantity: Number(order.qty),
-            updateAt: new Date(),
+            updatedAt: new Date(),
             createdAt: new Date(),
         }
 
