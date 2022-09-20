@@ -9,6 +9,7 @@ const compression = require('compression')
 
 const AuthController = require('./Routes/auth_routes')
 const AdminStaff = require('./Routes/AdminRoutes/staff_routes')
+const ShippingItem = require('./Routes/AdminRoutes/shipping_item_routes')
 const SupplierController = require('./Routes/SupplierRoutes/itemRoute')
 const AppError = require("./Utils/AppError");
 
@@ -65,6 +66,7 @@ const base = '/api/v1'
 
 app.use(`${base}/auth`, AuthController);
 app.use(`${base}/admin`, AdminStaff);
+app.use(`${base}/shipping-item`, ShippingItem);
 // app.use(`${base}/notices`, noticeRouter);
 // app.use(`${base}/admin`, adminRouter);
 
