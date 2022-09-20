@@ -13,7 +13,7 @@ const items = [
         qty:5,
         price:2000,
         address:'Deniyaya, Matara',
-        state:'pending'
+        status:'pending'
     },
     {
         item:'63190ad768ab4d21a0dbd930',
@@ -26,7 +26,7 @@ const items = [
         qty:5,
         price:2000,
         address:'Galle',
-        state:'shipped'
+        status:'shipped'
     }
 ]
 
