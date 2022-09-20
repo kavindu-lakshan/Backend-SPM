@@ -11,7 +11,7 @@ const shippingItem = new mongoose.Schema({
     address:{
         type:String
     },
-    account_type: {
+    status: {
         type: String,
         enum: ['draft', 'pending', 'shipped','declined'],
         default: 'draft'
