@@ -5,12 +5,15 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cors = require("cors");
-const compression = require('compression')
+const compression = require("compression");
 
-const AuthController = require('./Routes/auth_routes')
-const AdminStaff = require('./Routes/AdminRoutes/staff_routes')
 const ShippingItem = require('./Routes/AdminRoutes/shipping_item_routes')
-const SupplierController = require('./Routes/SupplierRoutes/itemRoute')
+const AuthController = require("./Routes/auth_routes");
+const AdminStaff = require("./Routes/AdminRoutes/staff_routes");
+const SupplierController = require("./Routes/SupplierRoutes/itemRoute");
+
+const StockController = require("./Routes/StockRoutes/stock_routes");
+const OrderController = require("./Routes/OrderRoutes/order_routes");
 const AppError = require("./Utils/AppError");
 
 const app = express();
@@ -61,12 +64,14 @@ app.use(
     })
 );
 
-app.use(compression())
-const base = '/api/v1'
+app.use(compression());
+const base = "/api/v1";
 
 app.use(`${base}/auth`, AuthController);
 app.use(`${base}/admin`, AdminStaff);
 app.use(`${base}/shipping-item`, ShippingItem);
+app.use(`${base}/stock`, StockController);
+app.use(`${base}/order`, OrderController);
 // app.use(`${base}/notices`, noticeRouter);
 // app.use(`${base}/admin`, adminRouter);
 
@@ -74,7 +79,13 @@ app.use(`${base}/shipping-item`, ShippingItem);
 app.use(`${base}/supplier`, SupplierController);
 
 app.all("*", (req, res, next) => {
-    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
+
+//stock routes
+
+app.all("*", (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 module.exports = app;
