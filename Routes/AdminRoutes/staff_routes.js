@@ -5,8 +5,8 @@ const router = express.Router();
 
 //This api-resource route for update and delete specific Staff
 router.route("/staff")
-    .get(staffController.allStaff)
-    .post(staffController.createStaff)
+    .get(authController.protect,staffController.allStaff)
+    .post(authController.protect,staffController.createStaff)
 
 
 router.route("/staff/:id")
