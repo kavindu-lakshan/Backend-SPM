@@ -17,12 +17,11 @@ exports.all_shipping_items = catchAsync(async (req, res, next) => {
 
 //update Staff
 exports.update_shipping_state = catchAsync(async (req, res, next) => {
+    console.log(req.body)
+    console.log(req.params.id)
     let all_ShippingItems = await ShippingItem.findByIdAndUpdate(req.params.id,req.body)
     res.status(201).json({
         status: "success",
-        data: {
-            all_ShippingItems,
-        },
     });
 });
 
