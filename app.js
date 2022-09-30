@@ -11,6 +11,7 @@ const ShippingItem = require('./Routes/AdminRoutes/shipping_item_routes')
 const AuthController = require("./Routes/auth_routes");
 const AdminStaff = require("./Routes/AdminRoutes/staff_routes");
 const SupplierController = require("./Routes/SupplierRoutes/itemRoute");
+const RequestController = require("./Routes/SupplierRoutes/itemRoute");
 
 const StockController = require("./Routes/StockRoutes/stock_routes");
 const OrderController = require("./Routes/OrderRoutes/order_routes");
@@ -77,6 +78,7 @@ app.use(`${base}/order`, OrderController);
 
 //supplier routes
 app.use(`${base}/supplier`, SupplierController);
+app.use(`${base}/request`, RequestController);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
