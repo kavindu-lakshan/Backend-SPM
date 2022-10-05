@@ -83,6 +83,7 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 
+
 //protected routes
 exports.protect = catchAsync(async (req, res, next) => {
     // Getting token and check of it's there
