@@ -28,6 +28,8 @@ module.exports = addOrder = async (req, res) => {
 
         let insertedOrder = await db.collection('orders').insertOne(orderObj)
 
+        await db.collection('stocks').updateOne({ item_code: ObjectId(order.item.value) }, { $inc: { 'reservation': Number(order.qty), 'available_stock': (-1 * order.qty) } })
+
         let item = await db.collection('items').find({ _id: ObjectId(order.item.value) }).toArray()
 
         await Promise.all(item.map(async e => {
