@@ -43,6 +43,16 @@ module.exports = addOrder = async (req, res) => {
             }
         ]
 
+        var pipeline2 = {
+            '$match': {
+                'orders.status': req.query.status
+            }
+        }
+
+        if (req.query.status) {
+            pipeline.push(pipeline2)
+        }
+
         var cursor = collection.aggregate(pipeline, options);
         var result = await cursor.toArray()
 

@@ -39,8 +39,10 @@ module.exports = addOrder = async (req, res) => {
                 item: e.name,
                 item_code: e.item_code,
                 brand: e.brand,
+                status: 'Initiated',
                 quantity: Number(order.qty),
-                price: Number((Number(e.price) * Number(order.qty)).toFixed(2))
+                price: Number((Number(e.price) * Number(order.qty)).toFixed(2)),
+                createdAt: new Date()
             }
 
             await db.collection('purchaseorders').insertOne(purchaseObj)
