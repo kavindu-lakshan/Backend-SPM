@@ -1,16 +1,14 @@
 /**
- * @file This file defines for add Order details
+ * @file This file defines for get purchase order details
  * @author Kavindu Shehan
  */
 const { MongoClient, ObjectId } = require('mongodb');
 
-module.exports = getOrder = async (req, res) => {
-    const { _id } = req.user;
-
+module.exports = getPurchaseOrders = async (req, res) => {
     const client = new MongoClient(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
     const db = client.db(process.env.MONGO_DB);
-    const collection = db.collection('orders');
+    const collection = db.collection('purchaseorders');
     console.info(`Database connected...!`)
 
     try {
@@ -22,30 +20,26 @@ module.exports = getOrder = async (req, res) => {
             {
                 '$project': {
                     '_id': 0,
-                    'orders': '$$ROOT'
+                    'purchaseorders': '$$ROOT'
                 }
             }, {
                 '$lookup': {
-                    'from': 'items',
-                    'localField': 'orders.item_ref',
+                    'from': 'orders',
+                    'localField': 'purchaseorders.order_ref',
                     'foreignField': '_id',
-                    'as': 'items'
+                    'as': 'orders'
                 }
             }, {
                 '$unwind': {
-                    'path': '$items',
+                    'path': '$orders',
                     'preserveNullAndEmptyArrays': false
-                }
-            }, {
-                '$match': {
-                    'orders.user': ObjectId(_id)
                 }
             }
         ]
 
         var pipeline2 = {
             '$match': {
-                'orders.status': req.query.status
+                'purchaseorders.status': req.query.status
             }
         }
 
