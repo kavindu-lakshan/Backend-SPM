@@ -11,6 +11,8 @@ module.exports = getStock = async (req, res) => {
     const collection = db.collection('stocks');
     console.info(`Database connected...!`)
 
+    console.log(req.query)
+
     try {
         var options = {
             allowDiskUse: true,
@@ -38,6 +40,16 @@ module.exports = getStock = async (req, res) => {
                 },
             },
         ];
+
+        var pipeline2 = {
+            '$match': {
+                'stocks.Availability': req.query.Availability === 'true' ? true : false
+            }
+        }
+
+        if (req.query.Availability) {
+            pipeline.push(pipeline2)
+        }
 
         var cursor = collection.aggregate(pipeline, options);
         var result = await cursor.toArray()
