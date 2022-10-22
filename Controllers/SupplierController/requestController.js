@@ -4,8 +4,7 @@ const Filter = require('../../Utils/Filters')
 
 //Create request
 exports.Store = catchAsync(async (req, res, next) => {
-    req.body.supplier_id = req.user
-    const newItem = await Item.create(req.body)
+    const newItem = await Request.create(req.body)
     res.status(201).json({
         status: 'success',
         data: {
