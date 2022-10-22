@@ -4,6 +4,7 @@ const Item = require("../../Models/itemModel");
 const catchAsync = require("../../Utils/catchAsync");
 const Filter = require("../../Utils/Filters");
 const e = require("express");
+const Request = require("../../Models/requestModel");
 
 //Create Stock
 exports.Stock = catchAsync(async (req, res, next) => {
@@ -37,6 +38,19 @@ exports.DeleteStock = catchAsync(async (req, res, next) => {
     status: "success",
     data: {
       deleteStock,
+    },
+  });
+});
+
+
+//Get all requests
+exports.AllStockManagerRequests = catchAsync(async (req, res, next) => {
+  let Respond = new Filter(Request.find(), req.query).filter().sort().limitFields().paginate();
+  const requests = await Respond.query;
+  res.status(201).json({
+    status: "success",
+    data: {
+      requests,
     },
   });
 });
