@@ -7,7 +7,14 @@ const hpp = require("hpp");
 const cors = require("cors");
 const compression = require("compression");
 
+const ShippingItem = require('./Routes/AdminRoutes/shipping_item_routes')
 const AuthController = require("./Routes/auth_routes");
+const AdminStaff = require("./Routes/AdminRoutes/staff_routes");
+const SupplierController = require("./Routes/SupplierRoutes/itemRoute");
+const RequestController = require("./Routes/SupplierRoutes/itemRoute");
+
+const StockController = require("./Routes/StockRoutes/stock_routes");
+const OrderController = require("./Routes/OrderRoutes/order_routes");
 const AppError = require("./Utils/AppError");
 
 const app = express();
@@ -62,7 +69,16 @@ app.use(compression());
 const base = "/api/v1";
 
 app.use(`${base}/auth`, AuthController);
+app.use(`${base}/admin`, AdminStaff);
+app.use(`${base}/shipping-item`, ShippingItem);
+app.use(`${base}/stock`, StockController);
+app.use(`${base}/order`, OrderController);
+// app.use(`${base}/notices`, noticeRouter);
+// app.use(`${base}/admin`, adminRouter);
 
+//supplier routes
+app.use(`${base}/supplier`, SupplierController);
+app.use(`${base}/request`, RequestController);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
