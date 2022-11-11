@@ -37,6 +37,18 @@ module.exports = getOrder = async (req, res) => {
                     'preserveNullAndEmptyArrays': false
                 }
             }, {
+                '$lookup': {
+                    'from': 'users',
+                    'localField': 'items.supplier_id',
+                    'foreignField': '_id',
+                    'as': 'users'
+                }
+            }, {
+                '$unwind': {
+                    'path': '$users',
+                    'preserveNullAndEmptyArrays': false
+                }
+            }, {
                 '$match': {
                     'orders.user': ObjectId(_id)
                 }
